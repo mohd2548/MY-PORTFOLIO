@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Indicator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #121212;
+            color: #fff;
+            text-align: center;
+        }
+        header {
+            background: #1f78d1;
+            color: white;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #1e1e1e;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .input-group {
+            margin: 20px 0;
+        }
+        input {
+            padding: 12px;
+            width: 90%;
+            font-size: 18px;
+            border: 2px solid #1f78d1;
+            border-radius: 5px;
+            outline: none;
+            background: #333;
+            color: #fff;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 18px;
+            margin-top: 15px;
+            cursor: pointer;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>Student Performance Indicator</header>
+    <div class="container">
+        <h2>Enter Student Data</h2>
+        <div class="input-group">
+            <input type="number" id="math" placeholder="Math Marks out of 100">
+        </div>
+        <div class="input-group">
+            <input type="number" id="science" placeholder="Science Marks out of 100">
+        </div>
+        <div class="input-group">
+            <input type="number" id="english" placeholder="English Marks out of 100">
+        </div>
+        <button onclick="predictPerformance()">Predict Performance</button>
+        <p class="result" id="performance"></p>
+    </div>
+    <script>
+        async function predictPerformance() {
+            let math = document.getElementById("math").value;
+            let science = document.getElementById("science").value;
+            let english = document.getElementById("english").value;
+            
+            let response = await fetch('http://127.0.0.1:5000/predict', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({math: math, science: science, english: english})
+            });
+            let result = await response.json();
+            
+            let resultElement = document.getElementById("performance");
+            resultElement.innerText = "Prediction: " + result.performance;
+            resultElement.style.background = "#17a2b8";
+            resultElement.style.color = "white";
+        }
+    </script>
+</body>
+</html>

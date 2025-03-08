@@ -20,12 +20,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Dark mode toggle
     const toggleButton = document.createElement("button");
-    toggleButton.innerText = "Toggle Dark Mode";
+    toggleButton.innerText = "Dark Mode";
     toggleButton.style.position = "fixed";
     toggleButton.style.top = "10px";
     toggleButton.style.right = "10px";
     toggleButton.style.padding = "10px";
-    toggleButton.style.backgroundColor = "#0073e6";
+    toggleButton.style.backgroundColor = "#111";
+    toggleButton.style.borderRadius = "18px";
     toggleButton.style.color = "white";
     toggleButton.style.border = "none";
     toggleButton.style.cursor = "pointer";
